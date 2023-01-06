@@ -5,12 +5,11 @@
 # return the length of the subarray that has no duplicate in it. 
 
 def remove_duplicates(arr):
-    i, nextNonDuplicate = 0, 1 # working index, index one after sorted unique array
-    while i < len(arr):                                 # for (int i = 0, i < arr.length, i++) 
+    nextNonDuplicate = 1 # index one after sorted unique array
+    for i in range(len(arr)):                                 # for (int i = 0, i < arr.length, i++) 
         if arr[nextNonDuplicate - 1] != arr[i]:         
             arr[nextNonDuplicate] = arr[i]               
             nextNonDuplicate += 1                       
-        i += 1
     return nextNonDuplicate
 
 # given a list remove all instances of key by moving non-key elems to the front and
