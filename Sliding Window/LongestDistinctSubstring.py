@@ -16,6 +16,32 @@ def findDistinctSubstring(str):
 
     return max_len
 
-print(findDistinctSubstring("aabccbb")) # should be 3
-print(findDistinctSubstring("abbbb")) # should be 2
-print(findDistinctSubstring("abccde")) # should be 3
+def main1():
+    print(findDistinctSubstring("aabccbb")) # should be 3
+    print(findDistinctSubstring("abbbb")) # should be 2
+    print(findDistinctSubstring("abccde")) # should be 3
+
+# main1()
+
+# different approach using a set
+def find_distinct_substring(str):
+    window_start, window_end= 0, 0
+    max_len = 0
+    chars = set()
+    while window_end < len(str):
+        right_char = str[window_end]
+        if right_char not in chars:
+            chars.add(right_char)
+            max_len = max(max_len, len(chars))
+            window_end += 1
+        else:
+            chars.remove(str[window_start])
+            window_start += 1
+    return max_len
+
+def main2():
+    print(find_distinct_substring("aabccbb")) # should be 3
+    print(find_distinct_substring("abbbb")) # should be 2
+    print(find_distinct_substring("abccde")) # should be 3
+
+main2()
