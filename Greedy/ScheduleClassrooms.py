@@ -22,6 +22,7 @@ def find_num_classrooms(A):
 # @return: dict<classrooms, list of tasks assigned to classroom> 
 # uses a min priority queue to keep track of classroom with earliest finish time
 # runs in O(n log n)
+# assumes closed intervals; change strict inequality in find_compatible_classroom to adjust
 class Solution:
     def find_classrooms(self, tasks):
         A = dict()  # A[k] = list of courses assigned to room k
