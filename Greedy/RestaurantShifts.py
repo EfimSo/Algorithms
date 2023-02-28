@@ -1,7 +1,5 @@
 # Given a list of shifts in a restaurant with [s, f] being the start and finish time of the shift,
 # find the minimal set of shifts so that there's at least one person working at each point
-
-
 def find_min_shifts(shifts):
     shifts.sort(key=lambda x: x[1]) # sort by finish time
     # pick next shift to ensure that the start time of the next shift is at least the finish time of the previous
