@@ -13,7 +13,7 @@ def find_min_shifts(shifts):
     for s, f in shifts:
         if s >= f_prev and s_curr is not None: # intervals are open at the end so s == f_prev is valid
             res.append([s_curr, f_curr])
-            f_prev = f_curr
+            f_prev = f_curr    # update last covered finish time
         s_curr, f_curr = s, f
     res.append([s_curr, f_curr])
  
