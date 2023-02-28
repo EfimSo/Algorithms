@@ -30,6 +30,6 @@ def find_visits(shifts):
         res.append(f)
     return res[:-1]     # exclude end of last interval since no shift at end
 
-l = [[0, 0.5], [0.3, 0.7], [0.4, 1], [0.6, 1.5], [1.5, 1.7]]
+l = [[0, 0.5], [0.3, 0.7], [0.4, 1], [0.6, 1.8], [1.4, 1.7]]
 print(find_min_shifts(l))
 print(find_visits(l))
