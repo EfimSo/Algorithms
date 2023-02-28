@@ -16,7 +16,6 @@ def find_min_shifts(shifts):
             f_prev = f_curr    # update last covered finish time
         s_curr, f_curr = s, f
     res.append([s_curr, f_curr])
- 
     return res
 
 # Given the list of shifts, find the maximum number of visits 
