@@ -10,21 +10,21 @@ def find_gas_stations(stations):
     res[0].append(stations[0])
     for i in range(1, n):
         for j in range(i):
-            if is_compatible(stations, i, j) and is_compatible(stations, j, i): # is this right? 
-                res[i] = res[j].copy()
+            if is_compatible(stations, i, j) and len(res[j]) > len(res[i]):
+                res[i] = res[j].copy() 
         res[i] += [stations[i]]
     max_subset = max(res, key=lambda x: len(x))
     print(res)
-    # is this right? 
-    if not (is_compatible(stations, -1, 0) and is_compatible(stations, 0, -1)):
+    if not is_compatible(stations, 0, -1):
         max_subset.remove(stations[-1])
     return max_subset
 
 def is_compatible(stations, i, j):
-    prev_dist =  (stations[i][0] - stations[j][0]) % 821
-    next_dist =  (stations[j][0] - stations[i][0]) % 821
-    if not (abs(prev_dist) < stations[i][1] or abs(next_dist) < stations[i][1]):
-        return True
-    return False
+    prev_dist =  abs((stations[i][0] - stations[j][0]) % 821)
+    next_dist =  abs((stations[j][0] - stations[i][0]) % 821)
+    if prev_dist < stations[i][1] or next_dist < stations[i][1] or \
+       prev_dist < stations[j][1] or next_dist < stations[j][1]:
+        return False
+    return True
 # print(find_gas_stations( [(0, 10), (100, 20), (200, 30), (300, 40)]))
-print(find_gas_stations([(0, 50), (200, 150), (400, 200), (600, 250), (800, 20)]))
+print(find_gas_stations([(0, 20), (200, 150), (400, 200), (400, 1), (405, 5), (410, 4), (600, 250), (800, 20)]))
