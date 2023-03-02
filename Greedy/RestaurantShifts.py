@@ -30,3 +30,14 @@ def find_visits(shifts):
 l = [[0, 0.5], [0.3, 0.7], [0.4, 1], [0.6, 1.8], [1.4, 1.7]]
 print(find_min_shifts(l))
 print(find_visits(l))
+
+
+# Online Python - IDE, Editor, Compiler, Interpreter
+
+def find_smaller(root, val):
+    if not root or root.key > val:
+        return 0
+    sum = root.val
+    sum += find_smaller(root.left)
+    sum += find_smaller(root.right)
+    return sum
