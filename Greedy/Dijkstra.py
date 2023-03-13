@@ -55,8 +55,8 @@ def main():
     G["c"] = [("d", 8), ("e", 8)]
     G["d"] = [("a", 3)]
     G["e"] = [("d", 1)]
-    # dist, parents = Dijkstra(G, "e")
-    # print(dist, parents)
+    dist, parents = Dijkstra(G, "s")
+    print(dist, parents)
     path, dist = find_min_path(G, "s", "d")
     print(f"path: {path}")
     print(f"distance: {dist}") 
