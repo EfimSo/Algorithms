@@ -60,4 +60,4 @@ def main():
     path, dist = find_min_path(G, "s", "d")
     print(f"path: {path}")
     print(f"distance: {dist}") 
-main()
+# main()
