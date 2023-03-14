@@ -37,6 +37,7 @@ def Dijkstra_unique(G, s):
 # algorithm that returns the edges of two distinct paths from s to x given graph G,
 # source node s and destination node x which is known to have multiple shortest paths from s
 # current issue: does not work correctly when backtracking only one node
+# correct reversing the list twice in DFS and find_two_shortest_paths
 def find_two_shortest_paths(G, s, x):
     # finds minimum path using Dijkstra
     dist, parents = Dijkstra(G, s)
