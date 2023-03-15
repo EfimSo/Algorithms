@@ -1,6 +1,7 @@
 from Dijkstra import Dijkstra
 from math import inf
 import heapq as hq
+from functools import reduce
 
 # modified Dijkstra algorithm that also returns a dictionary indicating if
 # each node has only one unique shortest path from the source
@@ -39,34 +40,45 @@ def Dijkstra_unique(G, s):
 # current issue: does not work correctly when backtracking only one node
 # correct reversing the list twice in DFS and find_two_shortest_paths
 def find_two_shortest_paths(G, s, x):
+    # helper function for edge printing    
+    def get_edges(nodes: list[str]):
+        res = []
+        for i in range(1, len(nodes)):
+            res.append((nodes[i-1], nodes[i]))
+        return res
     # finds minimum path using Dijkstra
     dist, parents = Dijkstra(G, s)
     if dist[x] == inf:
         return None, None   # x is not reachable from s
+    prev = x
     curr = parents[x]
-    distance = 0
+    # distance = 0
     path1 = [x]
     path2 = []
     found = False
     done = False
     visited = set()
     while curr is not None:
-        visited.add(curr)
         path1.append(curr)
-        # if parents[v] != curr and dist[v] == dist[curr] + wv:
-        #     found = True
-        if not done:
-            distance, path, found = DFS(G, curr, x, dist[curr], visited)
-            if found and distance == dist[x]:
-                done = True
-                path2.extend(path[::-1])
         if done:
             path2.append(curr)
+        else:
+            distance, path, found = DFS(G, curr, prev, x, dist[curr], visited)
+            if found and distance == dist[x]:
+                done = True
+                path2.extend(path)
+        prev = curr
         curr = parents[curr]
+    # return get_edges(path1[::-1]), get_edges(path2[::-1])
+    print(dist[x])
     return path1[::-1], path2[::-1]
 
-def DFS(G, s, d, start_distance, visited):
-    def recur(u, weight, length, path, found):
+def DFS(G, s, prev, d, start_distance, visited):
+    # add path length?
+    def recur(u, weight, length, num_nodes, path, found):
+        print(f"node: {u}", f"path length: {num_nodes}", f"prev: {prev}")
+        if u == prev and num_nodes == 1:
+            return -1, False
         if u == d:
             path.append(d)
             return length + weight, True
@@ -75,7 +87,7 @@ def DFS(G, s, d, start_distance, visited):
         else:
             for v, wv in G[u]:
                 if v not in visited:
-                    l, f = recur(v, wv, length, path, found)
+                    l, f = recur(v, wv, length, num_nodes + 1, path, found)
                     if f:
                         found = True
                         length = l
@@ -84,11 +96,12 @@ def DFS(G, s, d, start_distance, visited):
             path.append(u)
             return length + weight, True
         else:
+            visited.remove(u)
             return length, False
     path = []
-    length, found = recur(s, 0, 0, path, False)
+    length, found = recur(s, 0, 0, 0, path, False)
     if found:
-        return start_distance + length, path[::-1], True
+        return start_distance + length, path, True
     else:
         return -1, [], False
 
@@ -111,6 +124,6 @@ def main():
     # print(f"distance: {dist}") 
     # visited = set()
     # print(DFS(G, "s", "c", 0, visited))
-    p1, p2 = find_two_shortest_paths(G, "s", "e")
+    p1, p2 = find_two_shortest_paths(G, "s", "d")
     print(p1, p2)
 main()
