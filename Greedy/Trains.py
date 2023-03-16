@@ -30,7 +30,7 @@ def find_cities(cities, s): # s = starting city
         dist[dep_city] = earliest_arr_time
         if G[dep_city]:
             for arr_city, dep_time, arr_time in G[dep_city]:
-                if dep_time >= earliest_arr_time:
+                if dep_time >= earliest_arr_time and p[arr_city] > arr_time:
                     # try: Q.remove((p[arr_city], arr_city)) 
                     # except ValueError: pass 
                     Q.remove((p[arr_city], arr_city)) 
