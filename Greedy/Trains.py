@@ -1,7 +1,7 @@
 # Given n 4-tuples train(i) = (depcity(i), arrcity(i), dep(i), arr(i)) where
 # each tuple is a train leaving depcity(i) at dep(i) and arriving
 # to arrcity(i) at arr(i) and a starting city,
-# return the shortest time you can travel from your city to every other one
+# return the earliest time you can travel from your city to every other one
 # uses a version of Dijkstra with a min heap
 from heapq import heappush, heappop
 from math import inf
