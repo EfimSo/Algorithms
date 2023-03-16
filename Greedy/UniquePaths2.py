@@ -66,7 +66,6 @@ def DFS(G, s, pset, start_distance, visited):
                     if f:
                         found = True
                         length = l
-                        u = n
                         break
         if found:
             path.append(u)
