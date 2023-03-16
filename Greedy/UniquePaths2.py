@@ -49,18 +49,18 @@ def DFS(G, s, pset, start_distance, visited):
     # add path length?
     def recur(u, weight, length, num_nodes, path, found):
         print(f"node: {u}", f"path length: {num_nodes}")
-        if u in pset:
-            if num_nodes == 0:
-                pass 
-            elif num_nodes == 1:
-                return -1, False, None
-            else:
-                path.append(u)
-                return length + weight, True, u
+        if u == d:
+            path.append(u)
+            return length + weight, True, u
         visited.add(u)
         if not G[u]: pass
         else:
             for v, wv in G[u]:
+                if v in pset:
+                    if u in pset:
+                        continue
+                    path.append(v)
+                    return length + wv, True, v
                 if v not in visited:
                     l, f, n = recur(v, wv, length, num_nodes + 1, path, found)
                     if f:
