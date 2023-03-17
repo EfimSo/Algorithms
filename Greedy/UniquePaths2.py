@@ -60,6 +60,7 @@ def DFS(G, s, d, pset, start_distance, visited):
                     if u in pset:
                         continue
                     path.append(v)
+                    path.append(u)
                     return length + weight + wv, True, v
                 if v not in visited:
                     l, f, n = recur(v, wv, length, num_nodes + 1, path, found)
