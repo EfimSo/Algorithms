@@ -33,7 +33,7 @@ def find_two_shortest_paths(G, s, x):
             path2.append(curr)
         else:
             print(path_set)
-            distance, path, found, node = DFS(G, curr, path_set, dist[curr], visited)
+            distance, path, found, node = DFS(G, curr, x, path_set, dist[curr], visited)
             if found and distance == dist[node]:
                 print(f"node: {node}, distance: {distance}, dist: {dist[node]}")
                 done = True
@@ -45,7 +45,7 @@ def find_two_shortest_paths(G, s, x):
     # print(dist[x])
     return path1[::-1], path2[::-1]
 
-def DFS(G, s, pset, start_distance, visited):
+def DFS(G, s, d, pset, start_distance, visited):
     # add path length?
     def recur(u, weight, length, num_nodes, path, found):
         print(f"node: {u}", f"path length: {num_nodes}")
