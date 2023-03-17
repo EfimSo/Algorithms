@@ -33,8 +33,8 @@ def find_two_shortest_paths(G, s, x):
             path2.append(curr)
         else:
             print(path_set)
-            distance, path, found, node = DFS(G, curr, x, path_set, dist[curr], visited)
-            if found and distance == dist[node]:
+            distance, path, found, node = DFS(G, dist, curr, x, path_set, dist[curr], visited)
+            if found:
                 print(f"node: {node}, distance: {distance}, dist: {dist[node]}")
                 done = True
                 print(f"path: {path}")
@@ -49,39 +49,40 @@ def find_two_shortest_paths(G, s, x):
     # print(dist[x])
     return path1[::-1], path2[::-1]
 
-def DFS(G, s, d, pset, start_distance, visited):
+def DFS(G, distances, s, d, pset, start_distance, visited):
     # add path length?
-    def recur(u, weight, length, num_nodes, path, found):
+    def recur(u, length, path, found):
         print(f"node: {u}", f"path length: {num_nodes}")
         if u == d:
             path.append(u)
-            return length + weight, True, u
+            return length, True, u
         visited.add(u)
         if not G[u]: pass
         else:
             for v, wv in G[u]:
                 if v in pset:
-                    if u in pset:
+                    if u in pset
                         continue
-                    path.append(v)
-                    path.append(u)
-                    return length + weight + wv, True, v
+                    if length + wv == distances[v]:
+                        path.append(v)
+                        path.append(u)
+                        return length + wv, True, v
                 if v not in visited:
-                    l, f, n = recur(v, wv, length, num_nodes + 1, path, found)
+                    l, f, n = recur(v, length + wv, path, found)
                     if f:
                         found = True
                         length = l
                         break
         if found:
             path.append(u)
-            return length + weight, True, u
+            return length, True, u
         else:
             visited.remove(u)
             return length, False, None
     path = []
-    length, found, node = recur(s, 0, 0, 0, path, False)
+    length, found, node = recur(s, start_distance, path, False)
     if found:
-        return start_distance + length, path, True, node
+        return length, path, True, node
     else:
         return -1, [], False, None
 
