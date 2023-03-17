@@ -38,6 +38,10 @@ def find_two_shortest_paths(G, s, x):
                 print(f"node: {node}, distance: {distance}, dist: {dist[node]}")
                 done = True
                 print(f"path: {path}")
+                for n in path1:
+                    if n == node:
+                        break
+                    path2.append(n)
                 path2.extend(path)
         # prev = curr
         curr = parents[curr]
