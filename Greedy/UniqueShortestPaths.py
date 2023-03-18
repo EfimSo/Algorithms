@@ -1,7 +1,6 @@
 from Dijkstra import Dijkstra
 from math import inf
 import heapq as hq
-from functools import reduce
 
 # modified Dijkstra algorithm that also returns a dictionary indicating if
 # each node has only one unique shortest path from the source
