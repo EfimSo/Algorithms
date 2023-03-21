@@ -74,6 +74,32 @@ def DFS(G, distances, s, pset, visited):
     else:
         return [], None
 
+# doesn't work, questionable algo from HW solutions
+def two_shortest_paths(G, s, x):
+    def backtrack(parents, v):
+        curr = v
+        path = []
+        while curr is not None:
+            path.append(curr)
+            curr = parents[curr]
+        return path[::-1]
+    d, parents = Dijkstra(G, s)
+    path1 = backtrack(parents, s)
+    curr = x
+    path2 = []
+    while curr is not None:
+        for v, wv in G[curr]:
+            if v == parents[curr]:
+                continue
+            if d[curr] == d[v] + wv:
+                path2 += (curr, v) + backtrack(parents, curr)
+                break
+        path2 += (curr, parents[curr])
+        curr = parents[curr]
+    return path1, path2
+            
+    # find_min_path is the backtracking algorithm 
+
 
 def main():
     G = dict()
@@ -84,7 +110,8 @@ def main():
     G["d"] = [("a", 3)]
     G["e"] = [("d", 1)]
     # p1, p2 = find_two_shortest_paths(G, "s", "d")
-    p3, p4 = find_two_shortest_paths(G, "c", "a")
+    # p3, p4 = find_two_shortest_paths(G, "c", "a")
+    p3, p4 = two_shortest_paths(G, "c", "a")
     # print(p1, p2)
     print(p3, p4)
 main()
