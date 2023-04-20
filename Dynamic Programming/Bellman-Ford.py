@@ -9,12 +9,9 @@ def bellman_ford(G, t):
     M = dict()      # M[(i, v)] = OPT[i, v] = Optimal solution to get from v to t in at most i edges
     
     for v in G:
-        if v == t:
-            continue
         M[(0, v)] = inf
         children[v] = None
     M[(0, t)] = 0
-    children[t] = None
 
     for i in range(1, n):
         for v in G:
@@ -72,15 +69,15 @@ def main():
     G["c"] = [("d", 8), ("e", 8)]
     G["d"] = [("a", 3)]
     G["e"] = [("d", 1)]
-    # M, children = bellman_ford(G, "d")
-    # print(f"M: {M}")
-    # print(f"children: {children}")
-    # print({v: [M[(i, v)] for i in range(len(G.keys()))] for v in G})
-    # path = backtrack(children, "s")
-    # print(f"path: {path}")
-    dist, parents = bellman_ford2(G, "s")
-    print(f"dist: {dist}")
-    print(f"parents: {parents}")
-    path = backtrack2(dist, parents, "d")
+    M, children = bellman_ford(G, "d")
+    print(f"M: {M}")
+    print(f"children: {children}")
+    print({v: [M[(i, v)] for i in range(len(G.keys()))] for v in G})
+    path = backtrack(children, "s")
     print(f"path: {path}")
+    # dist, parents = bellman_ford2(G, "s")
+    # print(f"dist: {dist}")
+    # print(f"parents: {parents}")
+    # path = backtrack2(dist, parents, "d")
+    # print(f"path: {path}")
 main()
