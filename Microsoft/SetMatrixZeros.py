@@ -1,6 +1,6 @@
 # Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
 # Solution in O(mn) time and O(1) space
-# Returns nothinng, modifies matrix in place
+# Returns nothing, modifies matrix in place
 
 class Solution:
     def setZeroes(self, matrix: list[list[int]]) -> None:
