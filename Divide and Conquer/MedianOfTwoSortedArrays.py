@@ -8,7 +8,7 @@ def findMedianSortedArrays(nums1: list[int], nums2: list[int]) -> float:
 
     m, n = len(nums1), len(nums2)
     left, right = 0, m
-
+    
     while left <= right:
         partitionA = (left + right) // 2
         partitionB = (m + n + 1) // 2 - partitionA
